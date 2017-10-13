@@ -1,10 +1,17 @@
 {
-    "extends": "airbnb-base",
+    "extends": ["airbnb-base", "plugin:react/recommended"],
     "plugins": [
-        "import"
+        "import",
+        "react"
     ],
     "rules": {
         "indent": ["error", 2, { "SwitchCase": 1 }],
-        "prefer-arrow-callback": 0
+        "prefer-arrow-callback": 0,
+        "class-methods-use-this": 0
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
     }
 }
