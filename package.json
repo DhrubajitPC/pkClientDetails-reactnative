@@ -1,0 +1,20 @@
+{
+  "name": "client-details-server",
+  "version": "1.0.0",
+  "description": "exposes api endpoints that allow the app to post and retrieve data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb-base": "^12.0.2",
+    "eslint-plugin-import": "^2.7.0",
+    "express": "^4.16.2",
+    "mongoose": "^4.12.1",
+    "nodemon": "^1.12.1"
+  }
+}
