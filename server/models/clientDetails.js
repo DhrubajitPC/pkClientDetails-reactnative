@@ -41,6 +41,10 @@ const schema = mongoose.Schema({
     type: String,
     required: true,
   },
+  geoLocation: {
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model('clients', schema);
