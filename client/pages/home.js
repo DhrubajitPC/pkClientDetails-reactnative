@@ -14,12 +14,9 @@ const Form = t.form.Form;
 import {
   Container,
   Content,
+  Button
 } from 'native-base';
 
-const test = t.struct({
-  name: t.String,
-  age: t.String,
-});
 const ClientDetails = t.struct({
   shop_name: t.String,
   is_new_shop: t.enums({yes: 'Yes', no: 'No'}),
@@ -34,7 +31,7 @@ const ClientDetails = t.struct({
   preferred_payment_system: t.enums({cash: 'Cash', partial_payment: 'Partial Payment', credit: 'Credit'}),
   is_new_visit: t.enums({yes: 'Yes', no: 'No'}),
 });
-const options2 = {};
+
 const options = {
   fields: {
     shop_name: {
@@ -117,16 +114,13 @@ export default class Home extends Component{
     super(props);
     this.state= {
       tokenId: '',
-      values: {
-        is_new_shop: 'yes',
-        is_new_visit: 'yes',
-        preferred_payment_system: 'cash'
-      },
-      errors: {},
+      value: {},
+      error: {},
     };
-    this.onLogout = this.onLogout.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
     this.renderForm = this.renderForm.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onLogout = this.onLogout.bind(this);
   }
   static navigationOptions = {
 		headerLeft:null
@@ -146,25 +140,46 @@ export default class Home extends Component{
       })
   }
 
-  onValueChange2(val){
-    console.log(val)
+  onChange(val){
+    this.setState({
+      value: val,
+      error: ''
+    });
   }
 
   onSubmit(){
     console.log(this._form);
-    console.log(this.state.values)
-
+    console.log(this.state.value);
+    const isValid = this._form.validate().isValid();
+    console.log(isValid);
+    if(isValid){
+      // send post request
+      console.log('sending data to server')
+    }
   }
 
   renderForm() {
     return (
       <Container>
-        <Content style={{ padding: 20 }}>
+        <Content style={{ padding: 20 }} keyboardShouldPersistTaps={'always'}>
           <Form 
             ref={f => this._form = f}
             type={ClientDetails}
             options={options}
+            value={this.state.value}
+            onChange={this.onChange}
             />
+          <Button 
+            full
+            onPress={this.onSubmit}>
+            <Text>Submit</Text>
+          </Button>
+          <Button 
+            full
+            danger
+            onPress={this.onLogout}>
+            <Text>Log Out</Text>
+          </Button>
         </Content>
       </Container>
     );
