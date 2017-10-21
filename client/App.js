@@ -12,6 +12,10 @@ import Home from './pages/home';
 import Login from './pages/login';
 
 export default class App extends Component {
+  componentDidMount(){
+    Actions.home();
+  }
+
   render() {
     return (
       <Router>
@@ -20,13 +24,11 @@ export default class App extends Component {
             key='login'
             component={Login}
             title='Login'
-            back={false}
             />
           <Scene 
             key='home'
             component={Home}
-            title='Home'
-            back={false}
+            title='Client Details'
           />
         </Stack>
       </Router>
