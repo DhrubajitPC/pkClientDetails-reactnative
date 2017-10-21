@@ -1,21 +1,29 @@
+// React
 import React, { Component } from 'react';
 import {
   View,
   Text,
 } from 'react-native';
 
+// Router
 import { Actions } from 'react-native-router-flux';
+
+// Google
 import { GoogleSignin } from 'react-native-google-signin';
 
-//Form component
-import t from 'tcomb-form-native';
-const Form = t.form.Form;
-
+// Native Base
 import {
   Container,
   Content,
   Button
 } from 'native-base';
+
+// Camera
+import Camera from 'react-native-camera';
+
+//Form component
+import t from 'tcomb-form-native';
+const Form = t.form.Form;
 
 const ClientDetails = t.struct({
   shop_name: t.String,
