@@ -2,7 +2,11 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
+  Dimensions,
+  StyleSheet,
+  Modal,
+  TouchableHighlight,
+  Image,
 } from 'react-native';
 
 // Router
@@ -15,7 +19,11 @@ import { GoogleSignin } from 'react-native-google-signin';
 import {
   Container,
   Content,
-  Button
+  Button,
+  Label,
+  Item,
+  Icon,
+  Text,
 } from 'native-base';
 
 // Camera
@@ -38,6 +46,8 @@ const ClientDetails = t.struct({
   percent_of_ev: t.String,
   preferred_payment_system: t.enums({cash: 'Cash', partial_payment: 'Partial Payment', credit: 'Credit'}),
   is_new_visit: t.enums({yes: 'Yes', no: 'No'}),
+  latitude: t.Number,
+  longitude: t.Number,
 });
 
 const options = {
@@ -114,6 +124,20 @@ const options = {
       error: 'Please select yes/no',
       autoCapitalize: 'words',
     },
+    latitude: {
+      label: 'Latitude*',
+      underlineColorAndroid: 'transparent',
+      error: 'Please take photo of the shop. Device location must be turned on.',
+      autoCapitalize: 'words',
+      editable: false,
+    },
+    longitude: {
+      label: 'Longitude*',
+      underlineColorAndroid: 'transparent',
+      error: 'Please take photo of the shop. Device location must be turned on.',
+      autoCapitalize: 'words',
+      editable: false,
+    },
   }
 };
 
@@ -124,9 +148,15 @@ export default class Home extends Component{
       tokenId: '',
       value: {},
       error: {},
+      openCamera: false,
+      location: {},
+      imagePath: '',
     };
     this.renderForm = this.renderForm.bind(this);
+    this.renderCamera = this.renderCamera.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.openCamera = this.openCamera.bind(this);
+    this.takePicture = this.takePicture.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onLogout = this.onLogout.bind(this);
   }
@@ -140,13 +170,11 @@ export default class Home extends Component{
     })
   }
 
-  onLogout(){
-    GoogleSignin.signOut()
-      .then(() => {
-        console.log('logged out Successfully');
-        Actions.pop();
-      })
-  }
+  openCamera(){
+    this.setState({
+      openCamera: true
+    });
+  }  
 
   onChange(val){
     this.setState({
@@ -154,7 +182,7 @@ export default class Home extends Component{
       error: ''
     });
   }
-
+  
   onSubmit(){
     console.log(this._form);
     console.log(this.state.value);
@@ -165,7 +193,57 @@ export default class Home extends Component{
       console.log('sending data to server')
     }
   }
+  
+  onLogout(){
+    GoogleSignin.signOut()
+      .then(() => {
+        console.log('logged out Successfully');
+        Actions.replace('login');
+      })
+  }
 
+  async takePicture() {
+    const options = {};
+    //options.location = ...
+    try{
+      const data = await this.camera.capture({metadata: options})
+      
+      let lat, lng;
+      navigator.geolocation.getCurrentPosition( position => {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        this.setState({
+          value: Object.assign({longitude: lng, latitude: lat}, this.state.value)
+        });
+        console.log(this.state);
+      });
+
+      this.setState({
+        openCamera: false,
+        imagePath: data.path,
+      })
+
+      console.log(data, lat, lng);
+    } catch(err) {
+      console.log(err)
+    }
+    console.log('photo taken');
+  }
+  
+  renderCamera(){
+    return (
+      <View style={styles.container}>
+        <Camera
+          ref={(cam) => {
+            this.camera = cam;
+          }}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fill}>
+          <Text style={styles.capture} onPress={this.takePicture}>[CAPTURE]</Text>
+        </Camera>
+      </View>
+    );
+  }
   renderForm() {
     return (
       <Container>
@@ -177,6 +255,21 @@ export default class Home extends Component{
             value={this.state.value}
             onChange={this.onChange}
             />
+          <View style={{ paddingVertical: 20 }}>
+            <Label>Add Photo</Label>
+            {!!this.state.imagePath ? <Image source={{uri: this.state.imagePath}} style={{ margin: 10, height: 100, width: 100 }}/> : null}
+            <Item>
+            <Button 
+              iconLeft 
+              bordered 
+              primaryx
+              onPress={this.openCamera}
+              >
+              <Icon name='camera' />
+              <Text>Take Photo</Text>
+            </Button>
+            </Item>
+          </View>
           <Button 
             full
             onPress={this.onSubmit}>
@@ -185,7 +278,9 @@ export default class Home extends Component{
           <Button 
             full
             danger
-            onPress={this.onLogout}>
+            onPress={this.onLogout}
+            style={{ marginBottom: 40 }}
+            >
             <Text>Log Out</Text>
           </Button>
         </Content>
@@ -197,8 +292,38 @@ export default class Home extends Component{
     return (
       <View style={{ flex: 1 }}>
         {this.renderForm()}
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.openCamera}
+          onRequestClose={() => {this.setState({openCamera: false})}}
+          >
+         <View style={{flex: 1}}>
+          {this.renderCamera()}
+         </View>
+        </Modal>
       </View>
       
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
+  }
+});
