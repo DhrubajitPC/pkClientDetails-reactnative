@@ -4,3 +4,4 @@ client-details/node_modules
 client-details/.env
 /data
 .DS_Store
+client/.env
