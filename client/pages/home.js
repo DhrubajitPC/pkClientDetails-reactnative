@@ -29,6 +29,13 @@ import {
 // Camera
 import Camera from 'react-native-camera';
 
+// Api end point
+import { API_URL, USER_NAME, PASSWORD } from 'react-native-dotenv';
+
+//other imports
+import * as base64 from 'base-64';
+import moment from 'moment';
+
 //Form component
 import t from 'tcomb-form-native';
 const Form = t.form.Form;
@@ -42,7 +49,7 @@ const ClientDetails = t.struct({
   city: t.String,
   distr: t.String,
   currently_selling_brands: t.String,
-  selling_cap: t.String,
+  selling_cap: t.Integer,
   percent_of_ev: t.String,
   preferred_payment_system: t.enums({cash: 'Cash', partial_payment: 'Partial Payment', credit: 'Credit'}),
   is_new_visit: t.enums({yes: 'Yes', no: 'No'}),
@@ -103,7 +110,7 @@ const options = {
     selling_cap: {
       label: 'Total Selling Capacity*',
       underlineColorAndroid: 'transparent',
-      error: 'Please enter the total selling capacity of the shop',
+      error: 'Please enter the total selling capacity of the shop. Must be an integer',
       autoCapitalize: 'words',
     },
     percent_of_ev: {
@@ -164,10 +171,21 @@ export default class Home extends Component{
 		headerLeft:null
 	}
 
-  componentDidMount(){
+  componentWillReceiveProps(props){
+    console.log('component will receive props')
+    console.log(this.props, props);
     this.setState({
       tokenId: this.props.tokenId,
+      value: {
+        user_email: this.props.email,
+      }
     })
+  }
+  
+  componentDidMount(){
+    console.log('component mounted')
+    // console.log(this.props)
+    console.log(GoogleSignin.currentUser());
   }
 
   openCamera(){
@@ -178,19 +196,31 @@ export default class Home extends Component{
 
   onChange(val){
     this.setState({
-      value: val,
+      value: Object.assign({}, this.state.value, val),
       error: ''
     });
   }
   
   onSubmit(){
-    console.log(this._form);
-    console.log(this.state.value);
+    const username = USER_NAME;
+    const pw = PASSWORD;
+    const url = API_URL;
     const isValid = this._form.validate().isValid();
-    console.log(isValid);
     if(isValid){
+      const auth = 'Basic '+ base64.encode(`${username}:${pw}`);
       // send post request
-      console.log('sending data to server')
+      fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': auth,
+        },
+        body: JSON.stringify(this.state.value)
+      }).then(res => {
+        console.log('response ', res);
+      }).catch(err => {
+        console.log('err', err);
+      })
     }
   }
   
@@ -204,30 +234,29 @@ export default class Home extends Component{
 
   async takePicture() {
     const options = {};
-    //options.location = ...
     try{
       const data = await this.camera.capture({metadata: options})
-      
       let lat, lng;
       navigator.geolocation.getCurrentPosition( position => {
         lat = position.coords.latitude;
         lng = position.coords.longitude;
         this.setState({
-          value: Object.assign({longitude: lng, latitude: lat}, this.state.value)
+          value: Object.assign({
+            longitude: lng,
+            latitude: lat,
+            time_of_visit: moment(this.state.value.time_of_visit).format('YYYY-MM-DD hh:mm:ss'),
+            user_email: GoogleSignin.currentUser().email,
+          }, this.state.value)
         });
-        console.log(this.state);
       });
 
       this.setState({
         openCamera: false,
         imagePath: data.path,
       })
-
-      console.log(data, lat, lng);
     } catch(err) {
       console.log(err)
     }
-    console.log('photo taken');
   }
   
   renderCamera(){

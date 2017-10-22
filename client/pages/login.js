@@ -12,9 +12,6 @@ import { CLIENT_ID, WEB_ID } from 'react-native-dotenv';
 export default class Login extends Component{
   constructor(props){
     super(props);
-    this.state = {
-      user: null
-    };
     this.onLogin = this.onLogin.bind(this);
     this._setupGoogleSignin = this._setupGoogleSignin.bind(this);
   }
@@ -31,8 +28,6 @@ export default class Login extends Component{
       });
 
       const user = await GoogleSignin.currentUserAsync();
-      console.log(user);
-      this.setState({user});
     }
     catch(err) {
       console.log("Play services error", err.code, err.message);
@@ -43,9 +38,7 @@ export default class Login extends Component{
     await this._setupGoogleSignin();
     GoogleSignin.signIn()
     .then((user) => {
-      console.log(user);
-      this.setState({user: user});
-      Actions.home({ tokenId: user.idToken, type: ActionConst.REPLACE });
+      Actions.home({ type: ActionConst.REPLACE });
     })
     .catch((err) => {
       console.log('WRONG SIGNIN', err);
