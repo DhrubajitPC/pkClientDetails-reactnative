@@ -171,23 +171,6 @@ export default class Home extends Component{
 		headerLeft:null
 	}
 
-  componentWillReceiveProps(props){
-    console.log('component will receive props')
-    console.log(this.props, props);
-    this.setState({
-      tokenId: this.props.tokenId,
-      value: {
-        user_email: this.props.email,
-      }
-    })
-  }
-  
-  componentDidMount(){
-    console.log('component mounted')
-    // console.log(this.props)
-    console.log(GoogleSignin.currentUser());
-  }
-
   openCamera(){
     this.setState({
       openCamera: true
