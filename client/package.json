@@ -12,6 +12,7 @@
 		"native-base": "^2.3.3",
 		"react": "16.0.0-beta.5",
 		"react-native": "0.49.3",
+		"react-native-android-location-services-dialog-box": "^2.3.2",
 		"react-native-camera": "^0.10.0",
 		"react-native-google-signin": "^0.12.0",
 		"react-native-router-flux": "^4.0.0-beta.22",
