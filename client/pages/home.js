@@ -7,6 +7,7 @@ import {
   Modal,
   TouchableHighlight,
   Image,
+  BackHandler,
 } from 'react-native';
 
 // Router
@@ -24,6 +25,7 @@ import {
   Item,
   Icon,
   Text,
+  Toast,
 } from 'native-base';
 
 // Camera
@@ -33,6 +35,7 @@ import Camera from 'react-native-camera';
 import { API_URL, USER_NAME, PASSWORD } from 'react-native-dotenv';
 
 //other imports
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 import * as base64 from 'base-64';
 import moment from 'moment';
 
@@ -152,11 +155,9 @@ export default class Home extends Component{
   constructor(props){
     super(props);
     this.state= {
-      tokenId: '',
       value: {},
-      error: {},
-      openCamera: false,
-      location: {},
+      showCamera: false,
+      showSuccessModal: false,
       imagePath: '',
     };
     this.renderForm = this.renderForm.bind(this);
@@ -166,14 +167,46 @@ export default class Home extends Component{
     this.takePicture = this.takePicture.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onLogout = this.onLogout.bind(this);
+    this.checkIsLocation = this.checkIsLocation.bind(this);
+    this.latLong = this.latLong.bind(this);
+
+    BackHandler.addEventListener('hardwareBackPress', () => {
+       LocationServicesDialogBox.forceCloseDialog();
+    });
   }
+
   static navigationOptions = {
 		headerLeft:null
 	}
 
+  componentDidMount(){
+    this.checkIsLocation().then(r => console.log(r));
+  }
+
+  async checkIsLocation() {
+    let err = '';
+    let check = await LocationServicesDialogBox.checkLocationServicesIsEnabled({
+        message: "Use Location ?",
+        ok: "YES",
+        cancel: "NO",
+        enableHighAccuracy: false, // true => GPS AND NETWORK PROVIDER, false => ONLY GPS PROVIDER
+        showDialog: true, // false => Opens the Location access page directly
+        openLocationServices: true // false => Directly catch method is called if location services are turned off
+    }).catch(error => err = error);
+    if(!!err) {
+      Toast.show({
+        text: 'Location must be enabled!',
+        position: 'bottom',
+        buttonText: 'Okay'
+      })
+      return false;
+    }
+    return Object.is(check.status, "enabled");
+  }
+
   openCamera(){
     this.setState({
-      openCamera: true
+      showCamera: true
     });
   }  
 
@@ -201,6 +234,11 @@ export default class Home extends Component{
         body: JSON.stringify(this.state.value)
       }).then(res => {
         console.log('response ', res);
+        this.setState({
+          value: {},
+          showSuccessModal: true,
+        })
+        setTimeout(()=>this.setState({showSuccessModal: false}), 500);
       }).catch(err => {
         console.log('err', err);
       })
@@ -234,7 +272,7 @@ export default class Home extends Component{
       });
 
       this.setState({
-        openCamera: false,
+        showCamera: false,
         imagePath: data.path,
       })
     } catch(err) {
@@ -255,6 +293,23 @@ export default class Home extends Component{
         </Camera>
       </View>
     );
+  }
+
+  async latLong(){
+    console.log('lat long called');
+    const isLocation = await this.checkIsLocation();
+    if(isLocation){
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log('position', position);
+      })
+    }else{
+      console.log('location is not enabled');
+    }
+    this.setState({
+      value: {},
+      showSuccessModal: true,
+    })
+    setTimeout(()=>this.setState({showSuccessModal: false}), 1500);
   }
   renderForm() {
     return (
@@ -290,6 +345,14 @@ export default class Home extends Component{
           <Button 
             full
             danger
+            onPress={this.latLong}
+            style={{ marginBottom: 40 }}
+            >
+            <Text>Lat Long</Text>
+          </Button>
+          <Button 
+            full
+            danger
             onPress={this.onLogout}
             style={{ marginBottom: 40 }}
             >
@@ -307,12 +370,43 @@ export default class Home extends Component{
         <Modal
           animationType="slide"
           transparent={false}
-          visible={this.state.openCamera}
-          onRequestClose={() => {this.setState({openCamera: false})}}
+          visible={this.state.showCamera}
+          onRequestClose={() => {this.setState({showCamera: false})}}
           >
          <View style={{flex: 1}}>
           {this.renderCamera()}
          </View>
+        </Modal>
+        <Modal
+        animationType="fade"
+        transparent={true}
+        visible={this.state.showSuccessModal}
+        onRequestClose={() => {this.setState({showSuccessModal: false})}}
+        >
+          <View style={{
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255,255,255,0.4)',
+            marginTop: 0,
+            flex: 1,
+            paddingVertical: 20,
+            marginTop: 0,
+            }}>
+            <View
+              style={{
+                backgroundColor: 'rgba(240,245,238,1)',
+                width: Dimensions.get('window').width * 0.8,
+                borderRadius: 20,
+                paddingHorizontal: 30,
+                paddingVertical: 20,
+                alignItems: 'center'
+              }}>
+              
+              <Text style={{
+                textAlign: 'center'
+              }}>Submitted Successfully!</Text>
+            </View>
+          </View>
         </Modal>
       </View>
       
