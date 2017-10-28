@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   Image,
   BackHandler,
+  ScrollView,
 } from 'react-native';
 
 // Router
@@ -38,14 +39,20 @@ import { API_URL, USER_NAME, PASSWORD } from 'react-native-dotenv';
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 import * as base64 from 'base-64';
 import moment from 'moment';
+import RNExitApp from 'react-native-exit-app';
 
 //Form component
 import t from 'tcomb-form-native';
 const Form = t.form.Form;
 
+const $ = {}
+$.height = Dimensions.get('window').height - 20;
+$.width = Dimensions.get('window').width;
+
 const ClientDetails = t.struct({
   shop_name: t.String,
   is_new_shop: t.enums({yes: 'Yes', no: 'No'}),
+  address_update: t.enums({yes: 'Yes', no: 'No'}),
   phone: t.String,
   addr_street: t.String,
   addr_line2: t.maybe(t.String),
@@ -70,6 +77,12 @@ const options = {
     },
     is_new_shop: {
       label: 'Is The Shop New?*',
+      underlineColorAndroid: 'transparent',
+      error: 'Please select yes/no',
+      autoCapitalize: 'words',
+    },
+    address_update: {
+      label: 'Is there any update to the adress?*',
       underlineColorAndroid: 'transparent',
       error: 'Please select yes/no',
       autoCapitalize: 'words',
@@ -140,6 +153,7 @@ const options = {
       error: 'Please take photo of the shop. Device location must be turned on.',
       autoCapitalize: 'words',
       editable: false,
+      hidden: true,
     },
     longitude: {
       label: 'Longitude*',
@@ -147,6 +161,7 @@ const options = {
       error: 'Please take photo of the shop. Device location must be turned on.',
       autoCapitalize: 'words',
       editable: false,
+      hidden: true
     },
   }
 };
@@ -159,6 +174,9 @@ export default class Home extends Component{
       showCamera: false,
       showSuccessModal: false,
       imagePath: '',
+      showCompletedForm: false,
+      showFullFinalForm: false,
+      type: this.getType({}),
     };
     this.renderForm = this.renderForm.bind(this);
     this.renderCamera = this.renderCamera.bind(this);
@@ -169,18 +187,56 @@ export default class Home extends Component{
     this.onLogout = this.onLogout.bind(this);
     this.checkIsLocation = this.checkIsLocation.bind(this);
     this.latLong = this.latLong.bind(this);
+    this.getType = this.getType.bind(this);
+    this.onConfirmSubmit = this.onConfirmSubmit.bind(this);
+    this.cancelSubmit = this.cancelSubmit.bind(this);
 
     BackHandler.addEventListener('hardwareBackPress', () => {
        LocationServicesDialogBox.forceCloseDialog();
     });
   }
 
+  // getType(value){
+  //   if()
+  // }
   static navigationOptions = {
 		headerLeft:null
 	}
 
   componentDidMount(){
     this.checkIsLocation().then(r => console.log(r));
+  }
+
+  getType(value){
+    const options = {
+      shop_name: t.String,
+      is_new_shop: t.enums({yes: 'Yes', no: 'No'}),
+    };
+    if(!!value && value.is_new_shop === 'no'){
+      options.address_update = t.enums({yes: 'Yes', no: 'No'});
+      this.setState({
+        showFullFinalForm: false,
+      });
+    }
+    if((value.address_update === 'yes' && value.is_new_shop === 'no') || value.is_new_shop === 'yes') {
+      options.phone = t.String;
+      options.addr_street = t.String;
+      options.addr_line2 = t.maybe(t.String);
+      options.city = t.String;
+      options.distr = t.String;
+      options.currently_selling_brands = t.String;
+      options.selling_cap = t.Integer;
+      options.percent_of_ev = t.String;
+      options.preferred_payment_system = t.enums({cash: 'Cash', partial_payment: 'Partial Payment', credit: 'Credit'});
+      options.is_new_visit = t.enums({yes: 'Yes', no: 'No'});
+      options.latitude = t.Number;
+      options.longitude = t.Number;
+
+      this.setState({
+        showFullFinalForm: true,
+      });
+    }
+    return t.struct(options);
   }
 
   async checkIsLocation() {
@@ -208,43 +264,82 @@ export default class Home extends Component{
     this.setState({
       showCamera: true
     });
-  }  
+  }
 
   onChange(val){
     this.setState({
       value: Object.assign({}, this.state.value, val),
-      error: ''
+      error: '',
+      type: this.getType(val),
     });
   }
-  
+
   onSubmit(){
     const username = USER_NAME;
     const pw = PASSWORD;
     const url = API_URL;
     const isValid = this._form.validate().isValid();
     if(isValid){
-      const auth = 'Basic '+ base64.encode(`${username}:${pw}`);
-      // send post request
-      fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': auth,
-        },
-        body: JSON.stringify(this.state.value)
-      }).then(res => {
-        console.log('response ', res);
-        this.setState({
-          value: {},
-          showSuccessModal: true,
-        })
-        setTimeout(()=>this.setState({showSuccessModal: false}), 500);
-      }).catch(err => {
-        console.log('err', err);
-      })
+      this.setState({ showCompletedForm: true });
+      // const auth = 'Basic '+ base64.encode(`${username}:${pw}`);
+      // // send post request
+      // fetch(API_URL, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': auth,
+      //   },
+      //   body: JSON.stringify(this.state.value)
+      // }).then(res => {
+      //   console.log('response ', res);
+      //   this.setState({
+      //     value: {},
+      //     showSuccessModal: true,
+      //   })
+      //   setTimeout(()=>this.setState({showSuccessModal: false}), 1500);
+      // }).catch(err => {
+      //   console.log('err', err);
+      // })
     }
   }
-  
+
+  onConfirmSubmit(){
+    console.log('finalized submission');
+    this.setState({
+      showSuccessModal: true,
+      showCompletedForm: false,
+    });
+     setTimeout(()=>{
+       this.setState({showSuccessModal: false});
+       RNExitApp.exitApp();
+     }, 1500);
+    // const auth = 'Basic '+ base64.encode(`${username}:${pw}`);
+    // // send post request
+    // fetch(API_URL, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': auth,
+    //   },
+    //   body: JSON.stringify(this.state.value)
+    // }).then(res => {
+    //   console.log('response ', res);
+    //   this.setState({
+    //     value: {},
+    //     showSuccessModal: true,
+    //   })
+    //   setTimeout(()=>this.setState({showSuccessModal: false}), 1500);
+    // }).catch(err => {
+    //   console.log('err', err);
+    // })
+  }
+
+  cancelSubmit(){
+    this.setState({
+      showCompletedForm: false,
+    })
+  }
+
   onLogout(){
     GoogleSignin.signOut()
       .then(() => {
@@ -253,33 +348,33 @@ export default class Home extends Component{
       })
   }
 
-  async takePicture() {
+  takePicture() {
     const options = {};
-    try{
-      const data = await this.camera.capture({metadata: options})
-      let lat, lng;
-      navigator.geolocation.getCurrentPosition( position => {
-        lat = position.coords.latitude;
-        lng = position.coords.longitude;
-        this.setState({
-          value: Object.assign({
-            longitude: lng,
-            latitude: lat,
-            time_of_visit: moment(this.state.value.time_of_visit).format('YYYY-MM-DD hh:mm:ss'),
-            user_email: GoogleSignin.currentUser().email,
-          }, this.state.value)
-        });
-      });
+
+    this.camera.capture({metadata: options}).then(data => {
 
       this.setState({
-        showCamera: false,
         imagePath: data.path,
+        showCamera: false,
       })
-    } catch(err) {
-      console.log(err)
-    }
+      console.log('data ', data)
+    })
+    console.log(2);
+    let lat, lng;
+    navigator.geolocation.getCurrentPosition( position => {
+      lat = position.coords.latitude;
+      lng = position.coords.longitude;
+      this.setState({
+        value: Object.assign({
+          longitude: lng,
+          latitude: lat,
+          time_of_visit: moment(this.state.value.time_of_visit).format('YYYY-MM-DD hh:mm:ss'),
+          user_email: GoogleSignin.currentUser().email,
+        }, this.state.value)
+      });
+    });
   }
-  
+
   renderCamera(){
     return (
       <View style={styles.container}>
@@ -288,6 +383,9 @@ export default class Home extends Component{
             this.camera = cam;
           }}
           style={styles.preview}
+          captureQuality={'low'}
+          playSoundOnCapture={true}
+          type={Camera.constants.Type.back}
           aspect={Camera.constants.Aspect.fill}>
           <Text style={styles.capture} onPress={this.takePicture}>[CAPTURE]</Text>
         </Camera>
@@ -315,20 +413,22 @@ export default class Home extends Component{
     return (
       <Container>
         <Content style={{ padding: 20 }} keyboardShouldPersistTaps={'always'}>
-          <Form 
+          <Form
             ref={f => this._form = f}
-            type={ClientDetails}
+            type={this.state.type}
             options={options}
             value={this.state.value}
             onChange={this.onChange}
             />
           <View style={{ paddingVertical: 20 }}>
             <Label>Add Photo</Label>
-            {!!this.state.imagePath ? <Image source={{uri: this.state.imagePath}} style={{ margin: 10, height: 100, width: 100 }}/> : null}
+            {!!this.state.imagePath ?
+              <Image source={{uri: this.state.imagePath}} style={{ margin: 10, height: 100, width: 100 }}/>
+              : null}
             <Item>
-            <Button 
-              iconLeft 
-              bordered 
+            <Button
+              iconLeft
+              bordered
               primaryx
               onPress={this.openCamera}
               >
@@ -337,20 +437,20 @@ export default class Home extends Component{
             </Button>
             </Item>
           </View>
-          <Button 
+          <Button
             full
+            success
             onPress={this.onSubmit}>
             <Text>Submit</Text>
           </Button>
-          <Button 
+          <Button
             full
             danger
             onPress={this.latLong}
-            style={{ marginBottom: 40 }}
             >
             <Text>Lat Long</Text>
           </Button>
-          <Button 
+          <Button
             full
             danger
             onPress={this.onLogout}
@@ -361,6 +461,78 @@ export default class Home extends Component{
         </Content>
       </Container>
     );
+  }
+
+  renderCompletedForm(){
+    const { value, showFullFinalForm } = this.state;
+    return (
+      <View style={{ position: 'relative', height: $.height }}>
+        <Text style={{ padding: 20, fontSize: 20, fontWeight: 'bold' }}>Details: </Text>
+        <Image source={{uri: this.state.imagePath}} style={{ margin: 10, height: 200, width: 200, alignSelf: 'center' }}/>
+        <ScrollView style={{ paddingLeft: 20 }}>
+          <Text>
+            <Text style={{ fontWeight: 'bold' }}>Shop Name:</Text>    {value.shop_name}
+          </Text>
+          <Text>
+            <Text style={{ fontWeight: 'bold' }}>Is the Shop New?:</Text>   {value.is_new_shop}
+          </Text>
+          { showFullFinalForm ?
+            <View>
+              <Text>
+                <Text style={{ fontWeight: 'bold' }}>Phone:</Text>    {value.phone}
+              </Text>
+              <Text>
+                <Text style={{ fontWeight: 'bold' }}>Street Address:</Text> {value.addr_street}
+              </Text>
+              <Text>
+                <Text style={{ fontWeight: 'bold' }}>Address Line 2:</Text>   {value.addr_line2}
+              </Text>
+              <Text>
+                <Text style={{ fontWeight: 'bold' }}>City:</Text>   {value.city}
+              </Text>
+              <Text>
+                <Text style={{ fontWeight: 'bold' }}>District:</Text>   {value.distr}
+              </Text>
+              <Text>
+                <Text style={{ fontWeight: 'bold' }}>Brands Currently being sold:</Text>    {value.currently_selling_brands}
+              </Text>
+              <Text>
+                <Text style={{ fontWeight: 'bold' }}>Total Selling Capacity:</Text>   {value.selling_cap}
+              </Text>
+              <Text>
+                <Text style={{ fontWeight: 'bold' }}>Percent of EV + Easybike:</Text>   {value.percent_of_ev}
+              </Text>
+              <Text>
+                <Text style={{ fontWeight: 'bold' }}>Preferred Payment System:</Text>   {value.preferred_payment_system}
+              </Text>
+              <Text>
+                <Text style={{ fontWeight: 'bold' }}>Previously Visited:</Text>   {value.is_new_visit}
+              </Text>
+            </View> : null
+          }
+        </ScrollView>
+        <View style={{}}>
+          <View style={{ paddingTop
+
+            : 10 }}>
+            <Button
+              full
+              success
+              onPress={this.onConfirmSubmit}
+              >
+              <Text>Submit</Text>
+            </Button>
+            <Button
+              full
+              primary
+              onPress={this.cancelSubmit}
+              >
+                <Text>Back</Text>
+              </Button>
+          </View>
+        </View>
+      </View>
+    )
   }
 
   render(){
@@ -375,6 +547,16 @@ export default class Home extends Component{
           >
          <View style={{flex: 1}}>
           {this.renderCamera()}
+         </View>
+        </Modal>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.showCompletedForm}
+          onRequestClose={() => {this.setState({showCompletedForm: false})}}
+          >
+         <View style={{flex: 1}}>
+          {this.renderCompletedForm()}
          </View>
         </Modal>
         <Modal
@@ -395,21 +577,23 @@ export default class Home extends Component{
             <View
               style={{
                 backgroundColor: 'rgba(240,245,238,1)',
-                width: Dimensions.get('window').width * 0.8,
+                width: $.width * 0.8,
                 borderRadius: 20,
                 paddingHorizontal: 30,
                 paddingVertical: 20,
                 alignItems: 'center'
               }}>
-              
               <Text style={{
                 textAlign: 'center'
               }}>Submitted Successfully!</Text>
+              <Text style={{
+                textAlign: 'center'
+              }}>App will close now.</Text>
             </View>
           </View>
         </Modal>
       </View>
-      
+
     )
   }
 }
