@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Modal,
   TouchableHighlight,
+  TouchableOpacity,
   Image,
   BackHandler,
   ScrollView,
@@ -52,7 +53,7 @@ $.width = Dimensions.get('window').width;
 const ClientDetails = t.struct({
   shop_name: t.String,
   is_new_shop: t.enums({yes: 'Yes', no: 'No'}),
-  address_update: t.enums({yes: 'Yes', no: 'No'}),
+  details_update: t.enums({yes: 'Yes', no: 'No'}),
   phone: t.String,
   addr_street: t.String,
   addr_line2: t.maybe(t.String),
@@ -81,8 +82,8 @@ const options = {
       error: 'Please select yes/no',
       autoCapitalize: 'words',
     },
-    address_update: {
-      label: 'Is there any update to the adress?*',
+    details_update: {
+      label: 'Is there any update?*',
       underlineColorAndroid: 'transparent',
       error: 'Please select yes/no',
       autoCapitalize: 'words',
@@ -177,6 +178,7 @@ export default class Home extends Component{
       showCompletedForm: false,
       showFullFinalForm: false,
       type: this.getType({}),
+      enableCaptureButton: true,
     };
     this.renderForm = this.renderForm.bind(this);
     this.renderCamera = this.renderCamera.bind(this);
@@ -196,9 +198,6 @@ export default class Home extends Component{
     });
   }
 
-  // getType(value){
-  //   if()
-  // }
   static navigationOptions = {
 		headerLeft:null
 	}
@@ -213,12 +212,12 @@ export default class Home extends Component{
       is_new_shop: t.enums({yes: 'Yes', no: 'No'}),
     };
     if(!!value && value.is_new_shop === 'no'){
-      options.address_update = t.enums({yes: 'Yes', no: 'No'});
+      options.details_update = t.enums({yes: 'Yes', no: 'No'});
       this.setState({
         showFullFinalForm: false,
       });
     }
-    if((value.address_update === 'yes' && value.is_new_shop === 'no') || value.is_new_shop === 'yes') {
+    if((value.details_update === 'yes' && value.is_new_shop === 'no') || value.is_new_shop === 'yes') {
       options.phone = t.String;
       options.addr_street = t.String;
       options.addr_line2 = t.maybe(t.String);
@@ -275,63 +274,39 @@ export default class Home extends Component{
   }
 
   onSubmit(){
-    const username = USER_NAME;
-    const pw = PASSWORD;
-    const url = API_URL;
     const isValid = this._form.validate().isValid();
     if(isValid){
       this.setState({ showCompletedForm: true });
-      // const auth = 'Basic '+ base64.encode(`${username}:${pw}`);
-      // // send post request
-      // fetch(API_URL, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': auth,
-      //   },
-      //   body: JSON.stringify(this.state.value)
-      // }).then(res => {
-      //   console.log('response ', res);
-      //   this.setState({
-      //     value: {},
-      //     showSuccessModal: true,
-      //   })
-      //   setTimeout(()=>this.setState({showSuccessModal: false}), 1500);
-      // }).catch(err => {
-      //   console.log('err', err);
-      // })
     }
   }
 
   onConfirmSubmit(){
-    console.log('finalized submission');
-    this.setState({
-      showSuccessModal: true,
-      showCompletedForm: false,
-    });
-     setTimeout(()=>{
-       this.setState({showSuccessModal: false});
-       RNExitApp.exitApp();
-     }, 1500);
-    // const auth = 'Basic '+ base64.encode(`${username}:${pw}`);
-    // // send post request
-    // fetch(API_URL, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': auth,
-    //   },
-    //   body: JSON.stringify(this.state.value)
-    // }).then(res => {
-    //   console.log('response ', res);
-    //   this.setState({
-    //     value: {},
-    //     showSuccessModal: true,
-    //   })
-    //   setTimeout(()=>this.setState({showSuccessModal: false}), 1500);
-    // }).catch(err => {
-    //   console.log('err', err);
-    // })
+    const username = USER_NAME;
+    const pw = PASSWORD;
+    const url = API_URL;
+    const auth = 'Basic '+ base64.encode(`${username}:${pw}`);
+    // send post request
+    fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': auth,
+      },
+      body: JSON.stringify(this.state.value)
+    }).then(res => {
+      console.log('response ', res);
+      this.setState({
+        value: {},
+        showCompletedForm: false,
+        showSuccessModal: true,
+      })
+      setTimeout(()=>{
+        this.setState({showSuccessModal: false});
+        RNExitApp.exitApp();
+      }, 1500);
+    }).catch(err => {
+      console.log('err', err);
+    })
   }
 
   cancelSubmit(){
@@ -350,16 +325,17 @@ export default class Home extends Component{
 
   takePicture() {
     const options = {};
-
+    this.setState({
+      enableCaptureButton: false,
+    })
     this.camera.capture({metadata: options}).then(data => {
 
       this.setState({
         imagePath: data.path,
         showCamera: false,
+        enableCaptureButton: true,
       })
-      console.log('data ', data)
     })
-    console.log(2);
     let lat, lng;
     navigator.geolocation.getCurrentPosition( position => {
       lat = position.coords.latitude;
@@ -369,7 +345,7 @@ export default class Home extends Component{
           longitude: lng,
           latitude: lat,
           time_of_visit: moment(this.state.value.time_of_visit).format('YYYY-MM-DD hh:mm:ss'),
-          user_email: GoogleSignin.currentUser().email,
+          user_email: GoogleSignin.currentUser().email || 'dhrubajit1992@gmail.com',
         }, this.state.value)
       });
     });
@@ -387,7 +363,7 @@ export default class Home extends Component{
           playSoundOnCapture={true}
           type={Camera.constants.Type.back}
           aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture}>[CAPTURE]</Text>
+          <Text style={styles.capture} onPress={() => { this.state.enableCaptureButton ? this.takePicture() : null }}>[CAPTURE]</Text>
         </Camera>
       </View>
     );
@@ -409,6 +385,7 @@ export default class Home extends Component{
     })
     setTimeout(()=>this.setState({showSuccessModal: false}), 1500);
   }
+
   renderForm() {
     return (
       <Container>
@@ -429,7 +406,7 @@ export default class Home extends Component{
             <Button
               iconLeft
               bordered
-              primaryx
+              primary
               onPress={this.openCamera}
               >
               <Icon name='camera' />
@@ -441,20 +418,13 @@ export default class Home extends Component{
             full
             success
             onPress={this.onSubmit}>
-            <Text>Submit</Text>
-          </Button>
-          <Button
-            full
-            danger
-            onPress={this.latLong}
-            >
-            <Text>Lat Long</Text>
+            <Text>Next</Text>
           </Button>
           <Button
             full
             danger
             onPress={this.onLogout}
-            style={{ marginBottom: 40 }}
+            style={{marginBottom: 40}}
             >
             <Text>Log Out</Text>
           </Button>

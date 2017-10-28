@@ -14,20 +14,19 @@ import Login from './pages/login';
 export default class App extends Component {
 
   componentDidMount(){
-    Actions.home();
   }
-  
+
   render() {
     return (
       <Root>
         <Router>
           <Stack key='root'>
-            <Scene 
+            <Scene
               key='login'
               component={Login}
               title='Login'
               />
-            <Scene 
+            <Scene
               key='home'
               component={Home}
               title='Client Details'
