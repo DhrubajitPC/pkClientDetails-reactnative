@@ -38,9 +38,10 @@ import { API_URL, USER_NAME, PASSWORD } from 'react-native-dotenv';
 
 //other imports
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
-import * as base64 from 'base-64';
 import moment from 'moment';
+import base64 from 'base-64';
 import RNExitApp from 'react-native-exit-app';
+import RNFS from 'react-native-fs';
 
 //Form component
 import t from 'tcomb-form-native';
@@ -167,6 +168,19 @@ const options = {
   }
 };
 
+const placeholderValues = {
+  phone: 'NA',
+  addr_street: 'NA',
+  addr_line2: '',
+  city: 'NA',
+  distr: 'NA',
+  currently_selling_brands: 'NA',
+  selling_cap: 0,
+  percent_of_ev: 'NA',
+  preferred_payment_system: 'NA',
+  is_new_visit: 'NA',
+}
+
 export default class Home extends Component{
   constructor(props){
     super(props);
@@ -188,7 +202,6 @@ export default class Home extends Component{
     this.onSubmit = this.onSubmit.bind(this);
     this.onLogout = this.onLogout.bind(this);
     this.checkIsLocation = this.checkIsLocation.bind(this);
-    this.latLong = this.latLong.bind(this);
     this.getType = this.getType.bind(this);
     this.onConfirmSubmit = this.onConfirmSubmit.bind(this);
     this.cancelSubmit = this.cancelSubmit.bind(this);
@@ -259,10 +272,13 @@ export default class Home extends Component{
     return Object.is(check.status, "enabled");
   }
 
-  openCamera(){
-    this.setState({
-      showCamera: true
-    });
+  async openCamera(){
+    const isLocationEnabled = await this.checkIsLocation();
+    if(isLocationEnabled){
+      this.setState({
+        showCamera: true
+      });
+    }
   }
 
   onChange(val){
@@ -280,11 +296,22 @@ export default class Home extends Component{
     }
   }
 
-  onConfirmSubmit(){
+  async onConfirmSubmit(){
+    const {value} = this.state;
     const username = USER_NAME;
     const pw = PASSWORD;
     const url = API_URL;
     const auth = 'Basic '+ base64.encode(`${username}:${pw}`);
+
+    let data;
+    if(value.is_new_shop === 'no' && value.details_update === 'no'){
+      data = Object.assign(value, placeholderValues);
+    }
+
+    delete data.details_update;
+
+    const imageData = await RNFS.readFile(this.state.imagePath.substring(7), 'base64');
+    data.picture = imageData;
     // send post request
     fetch(API_URL, {
       method: 'POST',
@@ -292,18 +319,29 @@ export default class Home extends Component{
         'Content-Type': 'application/json',
         'Authorization': auth,
       },
-      body: JSON.stringify(this.state.value)
+      body: JSON.stringify(data)
     }).then(res => {
-      console.log('response ', res);
-      this.setState({
-        value: {},
-        showCompletedForm: false,
-        showSuccessModal: true,
-      })
-      setTimeout(()=>{
-        this.setState({showSuccessModal: false});
-        RNExitApp.exitApp();
-      }, 1500);
+      if(res.status === 201){
+        this.setState({
+          value: {},
+          showCompletedForm: false,
+          showSuccessModal: true,
+        })
+        setTimeout(()=>{
+          this.setState({showSuccessModal: false});
+          RNExitApp.exitApp();
+        }, 1500);
+      } else {
+        Toast.show({
+          text: 'Error occured! Please try again!',
+          position: 'bottom',
+          buttonText: 'Okay'
+        });
+        this.setState({
+          showCompletedForm: false,
+          showSuccessModal: true,
+        });
+      }
     }).catch(err => {
       console.log('err', err);
     })
@@ -329,7 +367,6 @@ export default class Home extends Component{
       enableCaptureButton: false,
     })
     this.camera.capture({metadata: options}).then(data => {
-
       this.setState({
         imagePath: data.path,
         showCamera: false,
@@ -361,29 +398,13 @@ export default class Home extends Component{
           style={styles.preview}
           captureQuality={'low'}
           playSoundOnCapture={true}
+          captureTarget={Camera.constants.CaptureTarget.temp}
           type={Camera.constants.Type.back}
           aspect={Camera.constants.Aspect.fill}>
           <Text style={styles.capture} onPress={() => { this.state.enableCaptureButton ? this.takePicture() : null }}>[CAPTURE]</Text>
         </Camera>
       </View>
     );
-  }
-
-  async latLong(){
-    console.log('lat long called');
-    const isLocation = await this.checkIsLocation();
-    if(isLocation){
-      navigator.geolocation.getCurrentPosition(position => {
-        console.log('position', position);
-      })
-    }else{
-      console.log('location is not enabled');
-    }
-    this.setState({
-      value: {},
-      showSuccessModal: true,
-    })
-    setTimeout(()=>this.setState({showSuccessModal: false}), 1500);
   }
 
   renderForm() {
@@ -482,9 +503,7 @@ export default class Home extends Component{
           }
         </ScrollView>
         <View style={{}}>
-          <View style={{ paddingTop
-
-            : 10 }}>
+          <View style={{ paddingTop : 10 }}>
             <Button
               full
               success
