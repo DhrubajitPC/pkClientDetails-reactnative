@@ -3,6 +3,7 @@ package com.client;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
 import com.github.wumke.RNExitApp.RNExitAppPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFSPackage(),
             new RNExitAppPackage(),
             new RCTCameraPackage(),
           new RNGoogleSigninPackage(),

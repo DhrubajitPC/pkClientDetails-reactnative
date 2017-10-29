@@ -15,6 +15,7 @@
 		"react-native-android-location-services-dialog-box": "^2.3.2",
 		"react-native-camera": "^0.10.0",
 		"react-native-exit-app": "^1.0.0",
+		"react-native-fs": "^2.8.1",
 		"react-native-google-signin": "^0.12.0",
 		"react-native-router-flux": "^4.0.0-beta.22",
 		"tcomb-form-native": "^0.6.11"
