@@ -147,6 +147,26 @@ const options = {
       editable: false,
       hidden: true
     },
+    comments: {
+      label: 'Comments',
+      error: 'try again.',
+      multiline: true,
+      numberOfRows: 4,
+      stylesheet: {
+        ...Form.stylesheet,
+        textbox: {
+          ...Form.stylesheet.textbox,
+          normal: {
+            ...Form.stylesheet.textbox.normal,
+            height: 100
+          },
+          error: {
+            ...Form.stylesheet.textbox.error,
+            height: 100
+          }
+        }
+      }
+    },
   }
 };
 
@@ -206,13 +226,25 @@ export default class Home extends Component{
       shop_name: t.String,
       is_new_shop: t.enums({yes: 'Yes', no: 'No'}),
     };
+
     if(!!value && value.is_new_shop === 'no'){
+      options.is_new_visit = t.enums({no: 'Yes', yes: 'No'}); //the answers r reversed because of the nature of the question posed
+      this.setState({
+        showFullFinalForm: false,
+      });
+    }
+
+    if(!!value && value.is_new_shop === 'no' && value.is_new_visit === 'no'){
       options.details_update = t.enums({yes: 'Yes', no: 'No'});
       this.setState({
         showFullFinalForm: false,
       });
     }
-    if((value.details_update === 'yes' && value.is_new_shop === 'no') || value.is_new_shop === 'yes') {
+
+    if((value.details_update === 'yes' && value.is_new_shop === 'no' && value.is_new_visit === 'no') ||
+      (value.is_new_shop === 'no' && value.is_new_visit === 'yes') ||
+      value.is_new_shop === 'yes'
+    ) {
       options.phone = t.String;
       options.addr_street = t.String;
       options.addr_line2 = t.maybe(t.String);
@@ -222,7 +254,6 @@ export default class Home extends Component{
       options.selling_cap = t.Integer;
       options.percent_of_ev = t.String;
       options.preferred_payment_system = t.enums({cash: 'Cash', partial_payment: 'Partial Payment', credit: 'Credit'});
-      options.is_new_visit = t.enums({yes: 'Yes', no: 'No'});
       options.latitude = t.Number;
       options.longitude = t.Number;
 
@@ -230,6 +261,8 @@ export default class Home extends Component{
         showFullFinalForm: true,
       });
     }
+
+    options.comments = t.maybe(t.String);
     return t.struct(options);
   }
 
@@ -285,9 +318,12 @@ export default class Home extends Component{
     const url = API_URL;
     const auth = 'Basic '+ base64.encode(`${username}:${pw}`);
 
-    let data;
-    if(value.is_new_shop === 'no' && value.details_update === 'no'){
+    let data = value;
+    if(value.details_update === 'no'){
       data = Object.assign(value, placeholderValues);
+    }
+    if(!!data.is_new_visit){
+      data.is_new_visit = 'NA';
     }
 
     delete data.details_update;
@@ -314,6 +350,7 @@ export default class Home extends Component{
           RNExitApp.exitApp();
         }, 1500);
       } else {
+        // console.log(JSON.stringify(res));
         Toast.show({
           text: 'Error occured! Please try again!',
           position: 'bottom',
@@ -321,7 +358,6 @@ export default class Home extends Component{
         });
         this.setState({
           showCompletedForm: false,
-          showSuccessModal: true,
         });
       }
     }).catch(err => {
@@ -449,6 +485,9 @@ export default class Home extends Component{
           <Text>
             <Text style={{ fontWeight: 'bold' }}>Is the Shop New?:</Text>   {value.is_new_shop}
           </Text>
+          <Text>
+            <Text style={{ fontWeight: 'bold' }}>Previously Visited:</Text>   {value.is_new_visit}
+          </Text>
           { showFullFinalForm ?
             <View>
               <Text>
@@ -478,11 +517,11 @@ export default class Home extends Component{
               <Text>
                 <Text style={{ fontWeight: 'bold' }}>Preferred Payment System:</Text>   {value.preferred_payment_system}
               </Text>
-              <Text>
-                <Text style={{ fontWeight: 'bold' }}>Previously Visited:</Text>   {value.is_new_visit}
-              </Text>
             </View> : null
           }
+          <Text>
+            <Text style={{ fontWeight: 'bold' }}>Comments:</Text>   {value.comments}
+          </Text>
         </ScrollView>
         <View style={{}}>
           <View style={{ paddingTop : 10 }}>
