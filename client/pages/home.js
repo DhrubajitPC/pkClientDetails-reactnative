@@ -51,24 +51,6 @@ const $ = {}
 $.height = Dimensions.get('window').height - 20;
 $.width = Dimensions.get('window').width;
 
-const ClientDetails = t.struct({
-  shop_name: t.String,
-  is_new_shop: t.enums({yes: 'Yes', no: 'No'}),
-  details_update: t.enums({yes: 'Yes', no: 'No'}),
-  phone: t.String,
-  addr_street: t.String,
-  addr_line2: t.maybe(t.String),
-  city: t.String,
-  distr: t.String,
-  currently_selling_brands: t.String,
-  selling_cap: t.Integer,
-  percent_of_ev: t.String,
-  preferred_payment_system: t.enums({cash: 'Cash', partial_payment: 'Partial Payment', credit: 'Credit'}),
-  is_new_visit: t.enums({yes: 'Yes', no: 'No'}),
-  latitude: t.Number,
-  longitude: t.Number,
-});
-
 const options = {
   fields: {
     shop_name: {
