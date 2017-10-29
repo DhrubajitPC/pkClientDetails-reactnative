@@ -382,7 +382,7 @@ export default class Home extends Component{
           longitude: lng,
           latitude: lat,
           time_of_visit: moment(this.state.value.time_of_visit).format('YYYY-MM-DD hh:mm:ss'),
-          user_email: GoogleSignin.currentUser().email || 'dhrubajit1992@gmail.com',
+          user_email: GoogleSignin.currentUser().email,
         }, this.state.value)
       });
     });
