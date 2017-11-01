@@ -11,7 +11,7 @@
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
-		00E356F31AD99517003FC87E /* PKgroupManagementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PKgroupManagementTests.m */; };
+		00E356F31AD99517003FC87E /* PKGroupManagementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PKGroupManagementTests.m */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -32,15 +32,15 @@
 		2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E941DF850E9000B6D8A /* libRCTText-tvOS.a */; };
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
-		2DCD954D1E0B4F2C00145EB5 /* PKgroupManagementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PKgroupManagementTests.m */; };
+		2DCD954D1E0B4F2C00145EB5 /* PKGroupManagementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PKGroupManagementTests.m */; };
 		3FC28809C3DA4F258BA98B66 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 803CEF84D6F44B83A7969E25 /* AddressBook.framework */; };
-		484E250A5A258DF6029B93A8 /* libPods-PKgroupManagement.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C580CB3603BC922C473E41 /* libPods-PKgroupManagement.a */; };
+		484E250A5A258DF6029B93A8 /* libPods-PKGroupManagement.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C580CB3603BC922C473E41 /* libPods-PKGroupManagement.a */; };
 		55DA1199BDF04F32853AD470 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6355E859B39A4118A74ABDBC /* libz.tbd */; };
 		5BAF8BB9CF7747F385158F9D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1656D1CEF819463381157F9E /* SystemConfiguration.framework */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		8015FE38C2154B62ACC27DF1 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F81C4009094CD6A91BE9A0 /* SafariServices.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		A121F31FD43771B2B50955A8 /* libPods-PKgroupManagementTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCE9CDCA52E15CA62820509A /* libPods-PKgroupManagementTests.a */; };
+		A121F31FD43771B2B50955A8 /* libPods-PKGroupManagementTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCE9CDCA52E15CA62820509A /* libPods-PKGroupManagementTests.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		F3417F7F6EEF455B89102C40 /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EDD18C04E564AAE84930DAD /* libRNGoogleSignin.a */; };
 		7E1E370585154D2CB49BC788 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F678067DB704993B1B2CE9A /* Entypo.ttf */; };
@@ -101,7 +101,7 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = PKgroupManagement;
+			remoteInfo = PKGroupManagement;
 		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -129,7 +129,7 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "PKgroupManagement-tvOS";
+			remoteInfo = "PKGroupManagement-tvOS";
 		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -322,37 +322,37 @@
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
 		00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTNetwork.xcodeproj; path = "../node_modules/react-native/Libraries/Network/RCTNetwork.xcodeproj"; sourceTree = "<group>"; };
 		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* PKgroupManagementTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PKgroupManagementTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* PKGroupManagementTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PKGroupManagementTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* PKgroupManagementTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKgroupManagementTests.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* PKGroupManagementTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKGroupManagementTests.m; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* PKgroupManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PKgroupManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PKgroupManagement/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = PKgroupManagement/AppDelegate.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* PKGroupManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PKGroupManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PKGroupManagement/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = PKGroupManagement/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = PKgroupManagement/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PKgroupManagement/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PKgroupManagement/main.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = PKGroupManagement/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PKGroupManagement/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PKGroupManagement/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1656D1CEF819463381157F9E /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		2D02E47B1E0B4A5D006451C7 /* PKgroupManagement-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PKgroupManagement-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* PKgroupManagement-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PKgroupManagement-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E47B1E0B4A5D006451C7 /* PKGroupManagement-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PKGroupManagement-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* PKGroupManagement-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PKGroupManagement-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EDD18C04E564AAE84930DAD /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = "<group>"; };
-		53D1A0D7734AF96661B64500 /* Pods-PKgroupManagementTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PKgroupManagementTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PKgroupManagementTests/Pods-PKgroupManagementTests.release.xcconfig"; sourceTree = "<group>"; };
+		53D1A0D7734AF96661B64500 /* Pods-PKGroupManagementTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PKGroupManagementTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PKGroupManagementTests/Pods-PKGroupManagementTests.release.xcconfig"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6355E859B39A4118A74ABDBC /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		7346FBE16014613FAFDFAC3F /* Pods-PKgroupManagement.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PKgroupManagement.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PKgroupManagement/Pods-PKgroupManagement.debug.xcconfig"; sourceTree = "<group>"; };
-		74D8DC6014EA27B29963D759 /* Pods-PKgroupManagement.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PKgroupManagement.release.xcconfig"; path = "Pods/Target Support Files/Pods-PKgroupManagement/Pods-PKgroupManagement.release.xcconfig"; sourceTree = "<group>"; };
+		7346FBE16014613FAFDFAC3F /* Pods-PKGroupManagement.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PKGroupManagement.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PKGroupManagement/Pods-PKGroupManagement.debug.xcconfig"; sourceTree = "<group>"; };
+		74D8DC6014EA27B29963D759 /* Pods-PKGroupManagement.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PKGroupManagement.release.xcconfig"; path = "Pods/Target Support Files/Pods-PKGroupManagement/Pods-PKGroupManagement.release.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		803CEF84D6F44B83A7969E25 /* AddressBook.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		93C580CB3603BC922C473E41 /* libPods-PKgroupManagement.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PKgroupManagement.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F2BB4C7EB22FBC2AAA3A460 /* Pods-PKgroupManagementTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PKgroupManagementTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PKgroupManagementTests/Pods-PKgroupManagementTests.debug.xcconfig"; sourceTree = "<group>"; };
+		93C580CB3603BC922C473E41 /* libPods-PKGroupManagement.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PKGroupManagement.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F2BB4C7EB22FBC2AAA3A460 /* Pods-PKGroupManagementTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PKGroupManagementTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PKGroupManagementTests/Pods-PKGroupManagementTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B818A2F180B4471D85D0DD1A /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGoogleSignin.xcodeproj; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; };
 		C9F81C4009094CD6A91BE9A0 /* SafariServices.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		DCE9CDCA52E15CA62820509A /* libPods-PKgroupManagementTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PKgroupManagementTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCE9CDCA52E15CA62820509A /* libPods-PKGroupManagementTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PKGroupManagementTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F678067DB704993B1B2CE9A /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A73975B5A12A4322A4DB94E6 /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		96ABFECC3B7641F4B18BF27E /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
@@ -379,7 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
-				A121F31FD43771B2B50955A8 /* libPods-PKgroupManagementTests.a in Frameworks */,
+				A121F31FD43771B2B50955A8 /* libPods-PKGroupManagementTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +400,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				484E250A5A258DF6029B93A8 /* libPods-PKgroupManagement.a in Frameworks */,
+				484E250A5A258DF6029B93A8 /* libPods-PKGroupManagement.a in Frameworks */,
 				F3417F7F6EEF455B89102C40 /* libRNGoogleSignin.a in Frameworks */,
 				55DA1199BDF04F32853AD470 /* libz.tbd in Frameworks */,
 				8015FE38C2154B62ACC27DF1 /* SafariServices.framework in Frameworks */,
@@ -479,13 +479,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		00E356EF1AD99517003FC87E /* PKgroupManagementTests */ = {
+		00E356EF1AD99517003FC87E /* PKGroupManagementTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* PKgroupManagementTests.m */,
+				00E356F21AD99517003FC87E /* PKGroupManagementTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = PKgroupManagementTests;
+			path = PKGroupManagementTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -516,7 +516,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* PKgroupManagement */ = {
+		13B07FAE1A68108700A75B9A /* PKGroupManagement */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -527,7 +527,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = PKgroupManagement;
+			name = PKGroupManagement;
 			sourceTree = "<group>";
 		};
 		146834001AC3E56700842450 /* Products */ = {
@@ -552,10 +552,10 @@
 		226E029B9E81700685387959 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7346FBE16014613FAFDFAC3F /* Pods-PKgroupManagement.debug.xcconfig */,
-				74D8DC6014EA27B29963D759 /* Pods-PKgroupManagement.release.xcconfig */,
-				9F2BB4C7EB22FBC2AAA3A460 /* Pods-PKgroupManagementTests.debug.xcconfig */,
-				53D1A0D7734AF96661B64500 /* Pods-PKgroupManagementTests.release.xcconfig */,
+				7346FBE16014613FAFDFAC3F /* Pods-PKGroupManagement.debug.xcconfig */,
+				74D8DC6014EA27B29963D759 /* Pods-PKGroupManagement.release.xcconfig */,
+				9F2BB4C7EB22FBC2AAA3A460 /* Pods-PKGroupManagementTests.debug.xcconfig */,
+				53D1A0D7734AF96661B64500 /* Pods-PKGroupManagementTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -613,9 +613,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* PKgroupManagement */,
+				13B07FAE1A68108700A75B9A /* PKGroupManagement */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* PKgroupManagementTests */,
+				00E356EF1AD99517003FC87E /* PKGroupManagementTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				A4BAA8B36F3943DC81D0154C /* Frameworks */,
 				AC66AAE71F961160002B5CE9 /* Recovered References */,
@@ -630,10 +630,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* PKgroupManagement.app */,
-				00E356EE1AD99517003FC87E /* PKgroupManagementTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* PKgroupManagement-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* PKgroupManagement-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* PKGroupManagement.app */,
+				00E356EE1AD99517003FC87E /* PKGroupManagementTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* PKGroupManagement-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* PKGroupManagement-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -641,8 +641,8 @@
 		A4BAA8B36F3943DC81D0154C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				93C580CB3603BC922C473E41 /* libPods-PKgroupManagement.a */,
-				DCE9CDCA52E15CA62820509A /* libPods-PKgroupManagementTests.a */,
+				93C580CB3603BC922C473E41 /* libPods-PKGroupManagement.a */,
+				DCE9CDCA52E15CA62820509A /* libPods-PKGroupManagementTests.a */,
 				6355E859B39A4118A74ABDBC /* libz.tbd */,
 				C9F81C4009094CD6A91BE9A0 /* SafariServices.framework */,
 				1656D1CEF819463381157F9E /* SystemConfiguration.framework */,
@@ -699,9 +699,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* PKgroupManagementTests */ = {
+		00E356ED1AD99517003FC87E /* PKGroupManagementTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "PKgroupManagementTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "PKGroupManagementTests" */;
 			buildPhases = (
 				160338E24C55F14B8F2316B8 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -715,14 +715,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = PKgroupManagementTests;
-			productName = PKgroupManagementTests;
-			productReference = 00E356EE1AD99517003FC87E /* PKgroupManagementTests.xctest */;
+			name = PKGroupManagementTests;
+			productName = PKGroupManagementTests;
+			productReference = 00E356EE1AD99517003FC87E /* PKGroupManagementTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* PKgroupManagement */ = {
+		13B07F861A680F5B00A75B9A /* PKGroupManagement */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "PKgroupManagement" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "PKGroupManagement" */;
 			buildPhases = (
 				256B4612300070C8600799CB /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -736,14 +736,14 @@
 			);
 			dependencies = (
 			);
-			name = PKgroupManagement;
+			name = PKGroupManagement;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* PKgroupManagement.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* PKGroupManagement.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* PKgroupManagement-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* PKGroupManagement-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "PKgroupManagement-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "PKGroupManagement-tvOS" */;
 			buildPhases = (
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -754,14 +754,14 @@
 			);
 			dependencies = (
 			);
-			name = "PKgroupManagement-tvOS";
-			productName = "PKgroupManagement-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* PKgroupManagement-tvOS.app */;
+			name = "PKGroupManagement-tvOS";
+			productName = "PKGroupManagement-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* PKGroupManagement-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* PKgroupManagement-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* PKGroupManagement-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "PKgroupManagement-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "PKGroupManagement-tvOSTests" */;
 			buildPhases = (
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
@@ -772,9 +772,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "PKgroupManagement-tvOSTests";
-			productName = "PKgroupManagement-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* PKgroupManagement-tvOSTests.xctest */;
+			name = "PKGroupManagement-tvOSTests";
+			productName = "PKGroupManagement-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* PKGroupManagement-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -801,7 +801,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "PKgroupManagement" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "PKGroupManagement" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -868,10 +868,10 @@
 			);
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* PKgroupManagement */,
-				00E356ED1AD99517003FC87E /* PKgroupManagementTests */,
-				2D02E47A1E0B4A5D006451C7 /* PKgroupManagement-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* PKgroupManagement-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* PKGroupManagement */,
+				00E356ED1AD99517003FC87E /* PKGroupManagementTests */,
+				2D02E47A1E0B4A5D006451C7 /* PKGroupManagement-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* PKGroupManagement-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1234,7 +1234,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PKgroupManagement/Pods-PKgroupManagement-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PKGroupManagement/Pods-PKGroupManagement-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		799793FFC473EEC3F8433CD1 /* [CP] Embed Pods Frameworks */ = {
@@ -1249,7 +1249,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PKgroupManagementTests/Pods-PKgroupManagementTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PKGroupManagementTests/Pods-PKGroupManagementTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7CF58C148629EB1509E37BCF /* [CP] Copy Pods Resources */ = {
@@ -1264,7 +1264,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PKgroupManagementTests/Pods-PKgroupManagementTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PKGroupManagementTests/Pods-PKGroupManagementTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ED7306B7BF87287FD0FEE7A1 /* [CP] Embed Pods Frameworks */ = {
@@ -1279,7 +1279,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PKgroupManagement/Pods-PKgroupManagement-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PKGroupManagement/Pods-PKGroupManagement-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1289,7 +1289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* PKgroupManagementTests.m in Sources */,
+				00E356F31AD99517003FC87E /* PKGroupManagementTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1315,7 +1315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* PKgroupManagementTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* PKGroupManagementTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1324,12 +1324,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* PKgroupManagement */;
+			target = 13B07F861A680F5B00A75B9A /* PKGroupManagement */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* PKgroupManagement-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* PKGroupManagement-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1341,7 +1341,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = PKgroupManagement;
+			path = PKGroupManagement;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1349,7 +1349,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F2BB4C7EB22FBC2AAA3A460 /* Pods-PKgroupManagementTests.debug.xcconfig */;
+			baseConfigurationReference = 9F2BB4C7EB22FBC2AAA3A460 /* Pods-PKGroupManagementTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1362,7 +1362,7 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 				);
-				INFOPLIST_FILE = PKgroupManagementTests/Info.plist;
+				INFOPLIST_FILE = PKGroupManagementTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1377,13 +1377,13 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PKgroupManagement.app/PKgroupManagement";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PKGroupManagement.app/PKGroupManagement";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53D1A0D7734AF96661B64500 /* Pods-PKgroupManagementTests.release.xcconfig */;
+			baseConfigurationReference = 53D1A0D7734AF96661B64500 /* Pods-PKGroupManagementTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -1393,7 +1393,7 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 				);
-				INFOPLIST_FILE = PKgroupManagementTests/Info.plist;
+				INFOPLIST_FILE = PKGroupManagementTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1408,13 +1408,13 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PKgroupManagement.app/PKgroupManagement";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PKGroupManagement.app/PKGroupManagement";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7346FBE16014613FAFDFAC3F /* Pods-PKgroupManagement.debug.xcconfig */;
+			baseConfigurationReference = 7346FBE16014613FAFDFAC3F /* Pods-PKGroupManagement.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1425,21 +1425,21 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 				);
-				INFOPLIST_FILE = PKgroupManagement/Info.plist;
+				INFOPLIST_FILE = PKGroupManagement/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_NAME = PKgroupManagement;
+				PRODUCT_NAME = PKGroupManagement;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74D8DC6014EA27B29963D759 /* Pods-PKgroupManagement.release.xcconfig */;
+			baseConfigurationReference = 74D8DC6014EA27B29963D759 /* Pods-PKGroupManagement.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1449,14 +1449,14 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 				);
-				INFOPLIST_FILE = PKgroupManagement/Info.plist;
+				INFOPLIST_FILE = PKGroupManagement/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_NAME = PKgroupManagement;
+				PRODUCT_NAME = PKGroupManagement;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1479,7 +1479,7 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 				);
-				INFOPLIST_FILE = "PKgroupManagement-tvOS/Info.plist";
+				INFOPLIST_FILE = "PKGroupManagement-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1492,7 +1492,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PKgroupManagement-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PKGroupManagement-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1518,7 +1518,7 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 				);
-				INFOPLIST_FILE = "PKgroupManagement-tvOS/Info.plist";
+				INFOPLIST_FILE = "PKGroupManagement-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1531,7 +1531,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PKgroupManagement-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PKGroupManagement-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1550,7 +1550,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "PKgroupManagement-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "PKGroupManagement-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1559,10 +1559,10 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PKgroupManagement-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PKGroupManagement-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PKgroupManagement-tvOS.app/PKgroupManagement-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PKGroupManagement-tvOS.app/PKGroupManagement-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
@@ -1578,7 +1578,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "PKgroupManagement-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "PKGroupManagement-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1587,10 +1587,10 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PKgroupManagement-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PKGroupManagement-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PKgroupManagement-tvOS.app/PKgroupManagement-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PKGroupManagement-tvOS.app/PKGroupManagement-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -1674,7 +1674,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "PKgroupManagementTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "PKGroupManagementTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -1683,7 +1683,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "PKgroupManagement" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "PKGroupManagement" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -1692,7 +1692,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "PKgroupManagement-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "PKGroupManagement-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -1701,7 +1701,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "PKgroupManagement-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "PKGroupManagement-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -1710,7 +1710,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "PKgroupManagement" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "PKGroupManagement" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
