@@ -1,4 +1,4 @@
-package com.client;
+package com.pkgroupmanagement;
 
 import android.app.Application;
 
