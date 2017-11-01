@@ -60,13 +60,13 @@ const options = {
         autoCapitalize: 'words',
     },
     is_new_shop: {
-      label: 'Is The Shop New?*',
+      label: 'Is it an existing dealer?*',
       underlineColorAndroid: 'transparent',
       error: 'Please select yes/no',
       autoCapitalize: 'words',
     },
-    details_update: {
-      label: 'Is there any update?*',
+    is_new_info: {
+      label: 'Is there any change in information?*',
       underlineColorAndroid: 'transparent',
       error: 'Please select yes/no',
       autoCapitalize: 'words',
@@ -126,7 +126,7 @@ const options = {
       autoCapitalize: 'words',
     },
     is_new_visit: {
-      label: 'Previously Visited*',
+      label: 'Have you visited the shop before?*',
       underlineColorAndroid: 'transparent',
       error: 'Please select yes/no',
       autoCapitalize: 'words',
@@ -152,6 +152,7 @@ const options = {
       error: 'try again.',
       multiline: true,
       numberOfRows: 4,
+      blurOnSubmit: false,
       stylesheet: {
         ...Form.stylesheet,
         textbox: {
@@ -181,6 +182,7 @@ const placeholderValues = {
   percent_of_ev: 'NA',
   preferred_payment_system: 'NA',
   is_new_visit: 'NA',
+  is_new_info: 'NA',
 }
 
 export default class Home extends Component{
@@ -224,43 +226,51 @@ export default class Home extends Component{
   getType(value){
     const options = {
       shop_name: t.String,
-      is_new_shop: t.enums({yes: 'Yes', no: 'No'}),
+      is_new_shop: t.enums({no: 'Yes', yes: 'No'}), //the answers r reversed because of the nature of the question posed
+      latitude: t.Number,
+      longitude: t.Number,
     };
 
-    if(!!value && value.is_new_shop === 'no'){
-      options.is_new_visit = t.enums({no: 'Yes', yes: 'No'}); //the answers r reversed because of the nature of the question posed
+    const extraQuestions = {
+      phone: t.String,
+      addr_street: t.String,
+      addr_line2: t.maybe(t.String),
+      city: t.String,
+      distr: t.String,
+      currently_selling_brands: t.String,
+      selling_cap: t.Integer,
+      percent_of_ev: t.String,
+      preferred_payment_system: t.enums({cash: 'Cash', partial_payment: 'Partial Payment', credit: 'Credit'}),
+    }
+
+
+    if(!!value){
       this.setState({
         showFullFinalForm: false,
       });
-    }
+      if(value.is_new_shop === 'yes'){
+         options.is_new_visit = t.enums({no: 'Yes', yes: 'No'}); //the answers r reversed because of the nature of the question posed
+      } else if (value.is_new_shop === 'no') {
+        value.is_new_visit = 'NA';
+        console.log(value);
+      }
 
-    if(!!value && value.is_new_shop === 'no' && value.is_new_visit === 'no'){
-      options.details_update = t.enums({yes: 'Yes', no: 'No'});
-      this.setState({
-        showFullFinalForm: false,
-      });
-    }
+      if (value.is_new_visit === 'yes') {
+        Object.assign(options, extraQuestions);
+        this.setState({
+          showFullFinalForm: true,
+        });
+      } else if (value.is_new_visit === 'no') {
+        options.is_new_info = t.enums({yes: 'Yes', no: 'No'});
+      }
 
-    if((value.details_update === 'yes' && value.is_new_shop === 'no' && value.is_new_visit === 'no') ||
-      (value.is_new_shop === 'no' && value.is_new_visit === 'yes') ||
-      value.is_new_shop === 'yes'
-    ) {
-      options.phone = t.String;
-      options.addr_street = t.String;
-      options.addr_line2 = t.maybe(t.String);
-      options.city = t.String;
-      options.distr = t.String;
-      options.currently_selling_brands = t.String;
-      options.selling_cap = t.Integer;
-      options.percent_of_ev = t.String;
-      options.preferred_payment_system = t.enums({cash: 'Cash', partial_payment: 'Partial Payment', credit: 'Credit'});
-      options.latitude = t.Number;
-      options.longitude = t.Number;
-
-      this.setState({
-        showFullFinalForm: true,
-      });
-    }
+      if (value.is_new_info === 'yes') {
+        Object.assign(options, extraQuestions);
+        this.setState({
+          showFullFinalForm: true,
+        });
+      }
+     }
 
     options.comments = t.maybe(t.String);
     return t.struct(options);
@@ -284,7 +294,7 @@ export default class Home extends Component{
       })
       return false;
     }
-    return Object.is(check.status, "enabled");
+    return true;
   }
 
   async openCamera(){
@@ -307,7 +317,8 @@ export default class Home extends Component{
   onSubmit(){
     const isValid = this._form.validate().isValid();
     if(isValid){
-      this.setState({ showCompletedForm: true });
+      const cal = Object.assign({}, placeholderValues, this.state.value);
+      this.setState({ showCompletedForm: true, value: cal });
     }
   }
 
@@ -319,14 +330,12 @@ export default class Home extends Component{
     const auth = 'Basic '+ base64.encode(`${username}:${pw}`);
 
     let data = value;
-    if(value.details_update === 'no'){
+    if(value.is_new_info === 'no'){
       data = Object.assign(value, placeholderValues);
     }
-    if(!!data.is_new_visit){
-      data.is_new_visit = 'NA';
-    }
 
-    delete data.details_update;
+    // delete data.is_new_info;
+    console.log(338, data);
 
     const imageData = await RNFS.readFile(this.state.imagePath.substring(7), 'base64');
     data.picture = imageData;
@@ -350,7 +359,7 @@ export default class Home extends Component{
           RNExitApp.exitApp();
         }, 1500);
       } else {
-        // console.log(JSON.stringify(res));
+        console.log(JSON.stringify(res));
         Toast.show({
           text: 'Error occured! Please try again!',
           position: 'bottom',
@@ -400,7 +409,7 @@ export default class Home extends Component{
           longitude: lng,
           latitude: lat,
           time_of_visit: moment(this.state.value.time_of_visit).format('YYYY-MM-DD hh:mm:ss'),
-          user_email: GoogleSignin.currentUser().email,
+          user_email: GoogleSignin.currentUser().email, 
         }, this.state.value)
       });
     });
@@ -483,11 +492,16 @@ export default class Home extends Component{
             <Text style={{ fontWeight: 'bold' }}>Shop Name:</Text>    {value.shop_name}
           </Text>
           <Text>
-            <Text style={{ fontWeight: 'bold' }}>Is the Shop New?:</Text>   {value.is_new_shop}
+            <Text style={{ fontWeight: 'bold' }}>Is it an existing dealer?:</Text>   {value.is_new_shop === 'no' ? 'yes' : 'no'}
           </Text>
-          <Text>
-            <Text style={{ fontWeight: 'bold' }}>Previously Visited:</Text>   {value.is_new_visit}
-          </Text>
+          {value.is_new_info !== 'NA' ?
+            <Text>
+              <Text style={{ fontWeight: 'bold' }}>Have you visited the shop before?:</Text>   {value.is_new_visit === 'no' ? 'yes' : 'no'}
+            </Text> : null}
+          {value.is_new_info !== 'NA' ?
+            <Text>
+              <Text style={{ fontWeight: 'bold' }}>Is there any change in information?:</Text>   {value.is_new_info}
+            </Text> : null}
           { showFullFinalForm ?
             <View>
               <Text>
@@ -520,7 +534,8 @@ export default class Home extends Component{
             </View> : null
           }
           <Text>
-            <Text style={{ fontWeight: 'bold' }}>Comments:</Text>   {value.comments}
+            <Text style={{ fontWeight: 'bold' }}>Comments:{`${'\n'}`}</Text>
+            {value.comments}
           </Text>
         </ScrollView>
         <View style={{}}>
