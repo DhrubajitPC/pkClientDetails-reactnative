@@ -28,6 +28,7 @@ import {
   Icon,
   Text,
   Toast,
+  Spinner,
 } from 'native-base';
 
 // Camera
@@ -189,6 +190,7 @@ export default class Home extends Component{
   constructor(props){
     super(props);
     this.state= {
+      loading: false,
       value: {},
       showCamera: false,
       showSuccessModal: false,
@@ -200,6 +202,7 @@ export default class Home extends Component{
     };
     this.renderForm = this.renderForm.bind(this);
     this.renderCamera = this.renderCamera.bind(this);
+    this.renderSpinner = this.renderSpinner.bind(this);
     this.onChange = this.onChange.bind(this);
     this.openCamera = this.openCamera.bind(this);
     this.takePicture = this.takePicture.bind(this);
@@ -413,6 +416,22 @@ export default class Home extends Component{
         }, this.state.value)
       });
     });
+  renderSpinner() {
+    return(
+      <Modal
+        transparent={true}
+        visible={true}
+        animationType='fade'
+        onRequestClose={() => console.log('loading done')}>
+        <View style={{
+          justifyContent: 'space-around',
+          backgroundColor: 'rgba(255,255,255,0.4)',
+          flex: 1,
+          }}>
+          <Spinner color='teal'/>
+        </View>
+      </Modal>
+    )
   }
 
   renderCamera(){
@@ -617,6 +636,7 @@ export default class Home extends Component{
             </View>
           </View>
         </Modal>
+        {this.state.loading ? this.renderSpinner() : null}
       </View>
 
     )
