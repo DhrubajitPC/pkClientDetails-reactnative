@@ -434,7 +434,7 @@ export default class Home extends Component{
     )
   }
 
-  renderCamera(){
+  renderCamera() {
     return (
       <View style={styles.container}>
         <Camera
@@ -583,6 +583,7 @@ export default class Home extends Component{
     return (
       <View style={{ flex: 1 }}>
         {this.renderForm()}
+        {/* the camera */}
         <Modal
           animationType="slide"
           transparent={false}
@@ -593,6 +594,7 @@ export default class Home extends Component{
           {this.renderCamera()}
          </View>
         </Modal>
+        {/* the completed form */}
         <Modal
           animationType="slide"
           transparent={false}
@@ -603,6 +605,7 @@ export default class Home extends Component{
           {this.renderCompletedForm()}
          </View>
         </Modal>
+        {/* the success modal */}
         <Modal
         animationType="fade"
         transparent={true}
