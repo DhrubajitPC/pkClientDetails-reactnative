@@ -208,10 +208,12 @@ export default class Home extends Component{
     this.takePicture = this.takePicture.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onLogout = this.onLogout.bind(this);
-    this.checkIsLocation = this.checkIsLocation.bind(this);
+    this.checkGPSEnabled = this.checkGPSEnabled.bind(this);
     this.getType = this.getType.bind(this);
     this.onConfirmSubmit = this.onConfirmSubmit.bind(this);
     this.cancelSubmit = this.cancelSubmit.bind(this);
+
+    this.updateLocation = this.updateLocation.bind(this);
 
     BackHandler.addEventListener('hardwareBackPress', () => {
        LocationServicesDialogBox.forceCloseDialog();
@@ -223,7 +225,7 @@ export default class Home extends Component{
 	}
 
   componentDidMount(){
-    this.checkIsLocation().then(r => console.log(r));
+    this.checkGPSEnabled().then(r => console.log(r));
   }
 
   getType(value){
@@ -255,7 +257,7 @@ export default class Home extends Component{
          options.is_new_visit = t.enums({no: 'Yes', yes: 'No'}); //the answers r reversed because of the nature of the question posed
       } else if (value.is_new_shop === 'no') {
         value.is_new_visit = 'NA';
-        console.log(value);
+        // console.log(value);
       }
 
       if (value.is_new_visit === 'yes') {
@@ -279,7 +281,7 @@ export default class Home extends Component{
     return t.struct(options);
   }
 
-  async checkIsLocation() {
+  async checkGPSEnabled() {
     let err = '';
     let check = await LocationServicesDialogBox.checkLocationServicesIsEnabled({
         message: "Use Location ?",
@@ -301,8 +303,9 @@ export default class Home extends Component{
   }
 
   async openCamera(){
-    const isLocationEnabled = await this.checkIsLocation();
-    if(isLocationEnabled){
+    const checkGPSEnabled = await this.checkGPSEnabled();
+    console.log(302, checkGPSEnabled);
+    if(checkGPSEnabled){
       this.setState({
         showCamera: true
       });
@@ -318,14 +321,35 @@ export default class Home extends Component{
   }
 
   onSubmit(){
+    console.log(this.state)
+    if(!this.state.imagePath) {
+      Toast.show({
+        text: 'Please upload a photo before proceeding',
+        position: 'bottom',
+        buttonText: 'Okay',
+      });
+      return;
+    }
+
     const isValid = this._form.validate().isValid();
-    if(isValid){
-      const cal = Object.assign({}, placeholderValues, this.state.value);
+    console.log(this._form.validate());
+    console.log(isValid);
+    if (isValid) {
+      const cal = Object.assign(placeholderValues, this.state.value);
       this.setState({ showCompletedForm: true, value: cal });
+    } else {
+      Toast.show({
+        text: 'Please fill in all details!',
+        position: 'bottom',
+        buttonText: 'Okay'
+      });
     }
   }
 
   async onConfirmSubmit(){
+    this.setState({
+      loading: true,
+    });
     const {value} = this.state;
     const username = USER_NAME;
     const pw = PASSWORD;
@@ -338,10 +362,14 @@ export default class Home extends Component{
     }
 
     // delete data.is_new_info;
-    console.log(338, data);
+    // console.log(338, data);
 
     const imageData = await RNFS.readFile(this.state.imagePath.substring(7), 'base64');
     data.picture = imageData;
+
+    console.log(345, data);
+
+
     // send post request
     fetch(API_URL, {
       method: 'POST',
@@ -356,6 +384,7 @@ export default class Home extends Component{
           value: {},
           showCompletedForm: false,
           showSuccessModal: true,
+          loading: false,
         })
         setTimeout(()=>{
           this.setState({showSuccessModal: false});
@@ -370,10 +399,19 @@ export default class Home extends Component{
         });
         this.setState({
           showCompletedForm: false,
+          loading: false,
         });
       }
     }).catch(err => {
       console.log('err', err);
+      Toast.show({
+        text: 'Error occured! Please try again!',
+        position: 'bottom',
+        buttonText: 'Okay'
+      });
+      this.setState({
+        loading: false,
+      })
     })
   }
 
@@ -391,31 +429,42 @@ export default class Home extends Component{
       })
   }
 
-  takePicture() {
-    const options = {};
-    this.setState({
-      enableCaptureButton: false,
-    })
-    this.camera.capture({metadata: options}).then(data => {
-      this.setState({
-        imagePath: data.path,
-        showCamera: false,
-        enableCaptureButton: true,
-      })
-    })
+  updateLocation(){
     let lat, lng;
-    navigator.geolocation.getCurrentPosition( position => {
+    const watchId = navigator.geolocation.watchPosition( position => {
       lat = position.coords.latitude;
       lng = position.coords.longitude;
+      console.log(lat, lng);
       this.setState({
         value: Object.assign({
           longitude: lng,
           latitude: lat,
           time_of_visit: moment(this.state.value.time_of_visit).format('YYYY-MM-DD hh:mm:ss'),
-          user_email: GoogleSignin.currentUser().email, 
+          user_email: GoogleSignin.currentUser().email || 'dhrubajit1992@gmail.com',
         }, this.state.value)
+      }, () => {
+        navigator.geolocation.clearWatch(watchId);
       });
     });
+  }
+
+  takePicture() {
+    this.setState({
+      enableCaptureButton: false,
+      loading: true,
+    });
+    const options = {};
+    this.camera.capture({metadata: options}).then(data => {
+      this.setState({
+        imagePath: data.path,
+        showCamera: false,
+        enableCaptureButton: true,
+        loading: false,
+      })
+    })
+    this.updateLocation();
+  }
+
   renderSpinner() {
     return(
       <Modal
